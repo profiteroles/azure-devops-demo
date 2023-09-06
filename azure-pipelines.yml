@@ -18,7 +18,6 @@ jobs:
 
   - job: ScanAzqr
     displayName: 'Run Azure Quick Review'
-    dependsOn: InstallAzqr
     steps:
     - script: |
         azqr scan
