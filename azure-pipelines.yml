@@ -19,6 +19,7 @@ jobs:
         chmod +x azqr
   - job: ScanAzqr
     displayName: 'Run Azure Quick Review'
+    dependsOn: RunAzqr
     steps:
     - script: |
         azqr scan
