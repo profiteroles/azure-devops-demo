@@ -30,9 +30,6 @@ jobs:
           latest_azqr=$(curl -sL https://api.github.com/repos/Azure/azqr/releases/latest | jq -r ".tag_name" | cut -c1-)
           wget https://github.com/Azure/azqr/releases/download/$latest_azqr/azqr-ubuntu-latest-amd64 -O azqr
           chmod +x azqr
-      # Runs a set of commands using the runners shell
-      - name: LoginAz 
-        run: az login
 
       # Runs a set of commands using the runners shell
       - name: RunAzqr
