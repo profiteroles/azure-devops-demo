@@ -9,17 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+  - job: RunAzqr
+    displayName: 'Install Azure Quick Review'
+    dependsOn: InstallAzqr
+    steps:
+    - script: |
+        latest_azqr=$(curl -sL https://api.github.com/repos/Azure/azqr/releases/latest | jq -r ".tag_name" | cut -c1-)
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- script: wget https://github.com/Azure/azqr/releases/download/$latest_azqr/azqr-ubuntu-latest-amd64 -O azqr
-  displayName: 'Install AZQR'
-
-- script: ./azqr scan
-  displayName: 'Scan the resources'
+  - job: RunAzqr
+    displayName: 'Run Azure Quick Review'
+    dependsOn: InstallAzqr
+    steps:
+    - script: |
+        azqr scan
